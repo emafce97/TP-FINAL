@@ -32,9 +32,9 @@ void runMenu(){
                         e = crearEstudiante();
                         if(datosCorrectosEstudiante(e)){
                             agregarEstudiante(&le,&le.head, e);
-                            printf("  --Estudiante agregado--\n");
+                            printf("  --ESTUDIANTE AGREGADO--\n");
                         }else{
-                            printf("  [ERROR]: DATOS ERRONEOS");
+                            printf("  [ERROR]:DATOS ERRONEOS\n");
                         }
                         break;
                     case 2: // ELECCION PARA OPCION 2 DEL MENU PARA ESTUDIANTES
@@ -51,7 +51,7 @@ void runMenu(){
                                 break;
                             case 2: // ELECCION PARA OPCION 2 DEL MENU DE BUSQUEDA DE ALUMNOS POR EDAD
                                 printf("Has elegido la opcion para buscar un alumno/s por edad\n");
-                                printf("FUNCION PARA BUSCAR ALUMNO/S POR EDAD - NO IMPLEMENTADA AUN\n");
+                                buscarEstudiantesPorRangoDeEdad(&le.head);
                                 break;
                             case 3:
                                 printf("Saliendo...\n");

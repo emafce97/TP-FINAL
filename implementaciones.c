@@ -37,7 +37,7 @@ int datosCorrectosEstudiante(Estudiante e){
 /*
  * Imprime los datos de un estudiante
  */
-void mostrarDatosEstudiantes(Estudiante e){
+void mostrarDatosEstudiante(Estudiante e){
     printf("  - NOMBRE: %s\n  - DNI: %ld\n  - EDAD: %d\n  - LEGAJO: %d\n", e.nombre, e.dni, e.edad, e.legajo);
 }
 
@@ -90,7 +90,7 @@ void listarEstudiantes(ListaEstudiantes *le, NodoEstudiante **cabeza) {
     }else {
         NodoEstudiante *cursor = *cabeza;
         while (cursor != NULL) {
-            mostrarDatosEstudiantes(cursor->estudiante);
+            mostrarDatosEstudiante(cursor->estudiante);
             cursor = cursor -> sgte;
         }
         printf ("  --ESTUDIANTES CARGADOS: %d--\n", le->cantEstudiantes);
@@ -126,23 +126,33 @@ void buscarEstudiantePorNombre(NodoEstudiante **cabeza) {
     if (buscado == NULL) {
         printf("  -El alumno %s no existe--\n", nombre);
     } else {
-        mostrarDatosEstudiantes(*buscado);
+        mostrarDatosEstudiante(*buscado);
     }
 }
 
 /*
  * Busca e imprime los datos de alumnos dentro de un rango de edad
  */
-void buscarEstudiantePorRangoDeEdad (ListaEstudiantes *lista, int inicio, int final) {
-    NodoEstudiante *puntero = lista->head;
+void buscarEstudiantesPorRangoDeEdad(NodoEstudiante **cabeza) {
+
+    int inicio,final;
+
+    printf("Ingrese la edad minima: ");
+    scanf("%d", &inicio);
+    printf("Ingrese la edad maxima: ");
+    scanf("%d", &final);
+
+    NodoEstudiante *puntero = *cabeza;
+    printf("Los estudiantes que tienen entre %d y %d anios son:\n", inicio, final);
+
     while (puntero != NULL) {
         if (puntero -> estudiante.edad >= inicio && puntero->estudiante.edad<= final) {
-            mostrarDatosEstudiantes(puntero->estudiante);
+            mostrarDatosEstudiante(puntero->estudiante);
+            printf("----#----#----#----#----#----#");
         }
         puntero = puntero->sgte;
     }
 }
-
 
 // Al pasarle un nombre y un legajo a la funcion, si existe un estudiante con esos datos lo elimina de la lista
 

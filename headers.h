@@ -44,9 +44,5 @@ ListaEstudiantes crearListaEstudiantes();
 void agregarEstudiante(ListaEstudiantes *le,NodoEstudiante **cabeza, Estudiante e);
 void buscarEstudiantePorNombre(NodoEstudiante **cabeza);
 void listarEstudiantes(ListaEstudiantes *le, NodoEstudiante **cabeza);
-
-
-
-
-//NodoEstudiante buscarEstudiantePorRangoEdad(NodoEstudiante *le, int edad_min, int edad_max);
+void buscarEstudiantesPorRangoDeEdad(NodoEstudiante **cabeza);
 //void eliminarEstudianteLista(NodoEstudiante *le, char nombre[]);
