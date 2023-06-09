@@ -45,4 +45,4 @@ void agregarEstudiante(ListaEstudiantes *le,NodoEstudiante **cabeza, Estudiante 
 void buscarEstudiantePorNombre(NodoEstudiante **cabeza);
 void listarEstudiantes(ListaEstudiantes *le, NodoEstudiante **cabeza);
 void buscarEstudiantesPorRangoDeEdad(NodoEstudiante **cabeza);
-//void eliminarEstudianteLista(NodoEstudiante *le, char nombre[]);
+void eliminarEstudianteDeLaLista(ListaEstudiantes *le, NodoEstudiante **cabeza);

@@ -148,73 +148,85 @@ void buscarEstudiantesPorRangoDeEdad(NodoEstudiante **cabeza) {
     while (puntero != NULL) {
         if (puntero -> estudiante.edad >= inicio && puntero->estudiante.edad<= final) {
             mostrarDatosEstudiante(puntero->estudiante);
-            printf("----#----#----#----#----#----#");
+            printf("----#----#----#----#----#----#\n");
         }
         puntero = puntero->sgte;
     }
 }
 
-// Al pasarle un nombre y un legajo a la funcion, si existe un estudiante con esos datos lo elimina de la lista
-
 /*
-Nodo *EliminarEstudianteDeLaLista (Nodo *lista, char nombre[], int legajo) {
+ * Elimina un estudiante segun el nombre y legajo
+ */
+void eliminarEstudianteDeLaLista (ListaEstudiantes *le,NodoEstudiante **cabeza) {
+
+    char nombre[100];
+    int legajo;
     int eliminado = 0;
-    Nodo *aux1 = lista;
-    Nodo *aux2 = NULL;
 
-    while (aux1 != NULL) {
-        if (strcmp(aux1->estudiante.nombre, nombre) == 0 && aux1->estudiante.legajo == legajo) {
-            if (aux2 != NULL) {
-                aux2->siguiente = aux1->siguiente;
-            } else {
-                lista = aux1->siguiente;
-            }
-            free(aux1);
-            eliminado = 1;
-            break;
-        }
-        aux2 = aux1;
-        aux1 = aux1->siguiente;
-    }
-    if (eliminado == 0) {
-        printf("El estudiante %s de legajo %d no se encuentra en la lista\n", nombre, legajo);
+    printf("Ingrese el nombre del estudiante: ");
+    scanf("%s", nombre);
+    printf("Ingrese el numero de legajo: ");
+    scanf("%d", &legajo);
+
+
+    if (le->cantEstudiantes == 0) {
+        printf("[ERROR]:NO HAY NADA PARA BORRAR\n");
+    } else if (le->cantEstudiantes == 1) {
+        *cabeza = NULL;
+        le->cantEstudiantes--;
     } else {
-        printf("El estudiante %s con legajo %d fue eliminado de la lista\n", nombre, legajo);
-    }
-
-    return lista;
-}
-
-//lo nuevo
-
-// Al pasar Materia y codigo, las agrega.
-void DarDeAltaMateria(Materia *materias, int *cantidadMaterias, char nombre[], int codigo) {
-    strcpy(materias[*cantidadMaterias].nombre, nombre);
-    materias[*cantidadMaterias].codigo = codigo;
-    (*cantidadMaterias)++;
-}
-// Recorre e imprime las materias disponibles
-void ListarMaterias(Materia *materias, int cantidadMaterias) {
-    printf("materias disponibles:\n");
-    for (int i = 0; i < cantidadMaterias; i++) {
-        printf("%d) %s Codigo: %d\n", i + 1, materias[i].nombre, materias[i].codigo);
-    }
-}
-
-// anota a un estudiante a la materia señalada con su codigo.
-void AnotarseEnMateria(Estudiante *estudiante, Materia *materias, int cantidadMaterias, int codigoMateria) {
-    for (int i = 0; i < cantidadMaterias; i++) {
-        if (materias[i].codigo == codigoMateria) {
-            estudiante->materias = realloc(estudiante->materias, (estudiante->cantidadMaterias + 1) * sizeof(Materia));
-            estudiante->materias[estudiante->cantidadMaterias] = materias[i];
-            (estudiante->cantidadMaterias)++;
-            printf("El estudiante %s se ha anotado en la materia %s.\n", estudiante->nombre, materias[i].nombre);
-            return;
+        NodoEstudiante *aux1 = *cabeza;
+        NodoEstudiante *aux2 = NULL;
+        while (aux1 != NULL) {
+            if (strcmp(aux1->estudiante.nombre, nombre) == 0 && aux1->estudiante.legajo == legajo) {
+                if (aux2 != NULL) {
+                    aux2->sgte = aux1->sgte;
+                } else {
+                    *cabeza = aux1->sgte;
+                }
+                free(aux1);
+                eliminado = 1;
+                le->cantEstudiantes--;
+                break;
+            }
+            aux2 = aux1;
+            aux1 = aux1->sgte;
+        }
+        if (eliminado == 0) {
+            printf("  -El estudiante %s de legajo %d no se encuentra en la lista\n", nombre, legajo);
+        } else {
+            printf("  -El estudiante %s con legajo %d fue eliminado de la lista\n", nombre, legajo);
         }
     }
-    printf("No se encontro una materia con el codigo %d.\n", codigoMateria);
 }
 
 
-
-*/
+////lo nuevo
+//
+//// Al pasar Materia y codigo, las agrega.
+//void DarDeAltaMateria(Materia *materias, int *cantidadMaterias, char nombre[], int codigo) {
+//    strcpy(materias[*cantidadMaterias].nombre, nombre);
+//    materias[*cantidadMaterias].codigo = codigo;
+//    (*cantidadMaterias)++;
+//}
+//// Recorre e imprime las materias disponibles
+//void ListarMaterias(Materia *materias, int cantidadMaterias) {
+//    printf("materias disponibles:\n");
+//    for (int i = 0; i < cantidadMaterias; i++) {
+//        printf("%d) %s Codigo: %d\n", i + 1, materias[i].nombre, materias[i].codigo);
+//    }
+//}
+//
+//// anota a un estudiante a la materia señalada con su codigo.
+//void AnotarseEnMateria(Estudiante *estudiante, Materia *materias, int cantidadMaterias, int codigoMateria) {
+//    for (int i = 0; i < cantidadMaterias; i++) {
+//        if (materias[i].codigo == codigoMateria) {
+//            estudiante->materias = realloc(estudiante->materias, (estudiante->cantidadMaterias + 1) * sizeof(Materia));
+//            estudiante->materias[estudiante->cantidadMaterias] = materias[i];
+//            (estudiante->cantidadMaterias)++;
+//            printf("El estudiante %s se ha anotado en la materia %s.\n", estudiante->nombre, materias[i].nombre);
+//            return;
+//        }
+//    }
+//    printf("No se encontro una materia con el codigo %d.\n", codigoMateria);
+//}

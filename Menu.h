@@ -23,7 +23,8 @@ void runMenu(){
                 printf(" 1.1 - Agregar Estudiante.\n");
                 printf(" 1.2 - Buscar Estudiante.\n");
                 printf(" 1.3 - Listar Estudiantes.\n");
-                printf(" 1.4 - Salir del Menu.\n");
+                printf(" 1.4 - Eliminar Estudiantes.\n");
+                printf(" 1.5 - Salir del Menu.\n");
                 printf("Ingrese una opcion: ");
                 scanf("%d", &opcion);
 
@@ -45,12 +46,11 @@ void runMenu(){
                         printf("Ingrese una opcion: ");
                         scanf("%d", &opcion);
 
-                        switch(opcion){ // PARA ELEGIR ENTRE LAS OPCION DE BUSCAR ALUMNOS
+                        switch(opcion){
                             case 1:
                                 buscarEstudiantePorNombre(&le.head);
                                 break;
-                            case 2: // ELECCION PARA OPCION 2 DEL MENU DE BUSQUEDA DE ALUMNOS POR EDAD
-                                printf("Has elegido la opcion para buscar un alumno/s por edad\n");
+                            case 2:
                                 buscarEstudiantesPorRangoDeEdad(&le.head);
                                 break;
                             case 3:
@@ -64,6 +64,9 @@ void runMenu(){
                     case 3:
                         listarEstudiantes(&le, &le.head);
                         break;
+                    case 4:
+                        eliminarEstudianteDeLaLista(&le, &le.head);
+                        break;
                     case 5:
                         printf("Saliendo del Menu...\n");
                         break;
@@ -71,8 +74,6 @@ void runMenu(){
                         printf("Opcion invalida.\n");
                         break;
                 }break;
-
-
 
                 // MENU PARA OPCION 2 (MATERIAS)
             case 2: // ELECCION PARA OPCION 2 DEL MENU PRINCIPAL
