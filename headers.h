@@ -41,9 +41,9 @@ typedef struct ListaEstudiantes{
 }ListaEstudiantes;
 
 ListaEstudiantes crearListaEstudiantes();
-void agregarEstudiante(ListaEstudiantes *lista,NodoEstudiante **cabeza, Estudiante e);
-void buscarEstudiantePorNombre(ListaEstudiantes *le);
-void listarEstudiantes(ListaEstudiantes *le);
+void agregarEstudiante(ListaEstudiantes *le,NodoEstudiante **cabeza, Estudiante e);
+void buscarEstudiantePorNombre(NodoEstudiante **cabeza);
+void listarEstudiantes(ListaEstudiantes *le, NodoEstudiante **cabeza);
 
 
 

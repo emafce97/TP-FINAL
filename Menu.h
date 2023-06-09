@@ -4,11 +4,12 @@
 void runMenu(){
 
     ListaEstudiantes le = crearListaEstudiantes();
+    // ListaMaterias lm = crearListaMaterias();
     Estudiante e;
     int opcion;
 
     do{
-        printf("\n-- MENU --\n");
+        printf("-- MENU PRINCIPAL --\n");
         printf(" 1 - Estudiantes.\n");
         printf(" 2 - Materias.\n");
         printf(" 0 - Salir.\n");
@@ -18,7 +19,7 @@ void runMenu(){
         switch (opcion) { // MENU PRINCIPAL
 
             case 1:
-                printf("\n-- ESTUDIANTES --\n");
+                printf("-- MENU ESTUDIANTES --\n");
                 printf(" 1.1 - Agregar Estudiante.\n");
                 printf(" 1.2 - Buscar Estudiante.\n");
                 printf(" 1.3 - Listar Estudiantes.\n");
@@ -31,9 +32,9 @@ void runMenu(){
                         e = crearEstudiante();
                         if(datosCorrectosEstudiante(e)){
                             agregarEstudiante(&le,&le.head, e);
-                            printf("  -Estudiante agregado-\n");
+                            printf("  --Estudiante agregado--\n");
                         }else{
-                            printf("[ERROR]: DATOS ERRONEOS");
+                            printf("  [ERROR]: DATOS ERRONEOS");
                         }
                         break;
                     case 2: // ELECCION PARA OPCION 2 DEL MENU PARA ESTUDIANTES
@@ -45,8 +46,8 @@ void runMenu(){
                         scanf("%d", &opcion);
 
                         switch(opcion){ // PARA ELEGIR ENTRE LAS OPCION DE BUSCAR ALUMNOS
-                            case 1: // ELECCION PARA OPCION 1 DEL MENU DE BUSQUEDA DE ALUMNOS POR NOMBRE
-                                buscarEstudiantePorNombre(&le);
+                            case 1:
+                                buscarEstudiantePorNombre(&le.head);
                                 break;
                             case 2: // ELECCION PARA OPCION 2 DEL MENU DE BUSQUEDA DE ALUMNOS POR EDAD
                                 printf("Has elegido la opcion para buscar un alumno/s por edad\n");
@@ -61,8 +62,7 @@ void runMenu(){
                         }break;
 
                     case 3:
-                        printf("  -- ALUMNOS CARGADOS --\n");
-                        listarEstudiantes(&le);
+                        listarEstudiantes(&le, &le.head);
                         break;
                     case 5:
                         printf("Saliendo del Menu...\n");

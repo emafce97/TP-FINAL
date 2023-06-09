@@ -23,6 +23,7 @@ Estudiante crearEstudiante(){
 
     return e;
 }
+
 /*
  * Verifica si los datos del estudiante son correctos
  */
@@ -36,7 +37,7 @@ int datosCorrectosEstudiante(Estudiante e){
 /*
  * Imprime los datos de un estudiante
  */
-void mostrarDatos(Estudiante e){
+void mostrarDatosEstudiantes(Estudiante e){
     printf("  - NOMBRE: %s\n  - DNI: %ld\n  - EDAD: %d\n  - LEGAJO: %d\n", e.nombre, e.dni, e.edad, e.legajo);
 }
 
@@ -63,7 +64,8 @@ NodoEstudiante *crearNodoEstudiante(Estudiante e){
 /*
  * Agrega un estudiante a la lista
  */
-void agregarEstudiante(ListaEstudiantes *lista,NodoEstudiante **cabeza, Estudiante e) {
+void agregarEstudiante(ListaEstudiantes *lista, NodoEstudiante **cabeza, Estudiante e) {
+
     NodoEstudiante *nuevo = crearNodoEstudiante(e);
 
     if (*cabeza == NULL) {
@@ -75,24 +77,24 @@ void agregarEstudiante(ListaEstudiantes *lista,NodoEstudiante **cabeza, Estudian
         }
         puntero -> sgte = nuevo;
     }
+
     lista->cantEstudiantes++;
 }
 
 /*
  * Imprime los datos de cada estudiante cargados en la lista
  */
-void listarEstudiantes(ListaEstudiantes *le) {
-    NodoEstudiante *cabeza = le->head;
-    if (cabeza == NULL) {
+void listarEstudiantes(ListaEstudiantes *le, NodoEstudiante **cabeza) {
+    if (*cabeza == NULL) {
         printf("  --NO HAY ALUMNOS CARGADOS--");
     }else {
-        NodoEstudiante *cursor = cabeza;
+        NodoEstudiante *cursor = *cabeza;
         while (cursor != NULL) {
-            mostrarDatos(cursor->estudiante);
+            mostrarDatosEstudiantes(cursor->estudiante);
             cursor = cursor -> sgte;
         }
+        printf ("  --ESTUDIANTES CARGADOS: %d--\n", le->cantEstudiantes);
     }
-    printf ("ESTUDIANTES CARGADOS: %d\n", le->cantEstudiantes);
 }
 
 /*
@@ -106,24 +108,25 @@ int cantidadDeEstudiantes(ListaEstudiantes *lista){
 /*
  * Busca e impreme los datos de un alumno buscado por su nombre
  */
-void buscarEstudiantePorNombre(ListaEstudiantes *le) {
+void buscarEstudiantePorNombre(NodoEstudiante **cabeza) {
 
     char nombre[100];
-    printf("Ingrese el nombre del estudiante: ");
+    printf("  Ingrese el nombre del estudiante: ");
     scanf("%s", nombre);
 
-    NodoEstudiante *puntero = le->head;
-    Estudiante *buscado;
-    while (puntero != NULL) {
-        if (puntero->estudiante.nombre == nombre){
-            buscado = &puntero->estudiante;
+    NodoEstudiante *cursor = *cabeza;
+    Estudiante *buscado = NULL;
+
+    while (cursor != NULL) {
+        if (strcmp(cursor->estudiante.nombre, nombre) == 0){
+            buscado = &cursor->estudiante;
         }
-        puntero = puntero -> sgte;
+        cursor = cursor -> sgte;
     }
     if (buscado == NULL) {
         printf("  -El alumno %s no existe--\n", nombre);
     } else {
-        mostrarDatos(*buscado);
+        mostrarDatosEstudiantes(*buscado);
     }
 }
 
@@ -134,7 +137,7 @@ void buscarEstudiantePorRangoDeEdad (ListaEstudiantes *lista, int inicio, int fi
     NodoEstudiante *puntero = lista->head;
     while (puntero != NULL) {
         if (puntero -> estudiante.edad >= inicio && puntero->estudiante.edad<= final) {
-            mostrarDatos(puntero->estudiante);
+            mostrarDatosEstudiantes(puntero->estudiante);
         }
         puntero = puntero->sgte;
     }
