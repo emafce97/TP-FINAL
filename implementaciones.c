@@ -86,11 +86,12 @@ void agregarEstudiante(ListaEstudiantes *lista, NodoEstudiante **cabeza, Estudia
  */
 void listarEstudiantes(ListaEstudiantes *le, NodoEstudiante **cabeza) {
     if (*cabeza == NULL) {
-        printf("  --NO HAY ALUMNOS CARGADOS--");
+        printf("  --NO HAY ALUMNOS CARGADOS--\n");
     }else {
         NodoEstudiante *cursor = *cabeza;
         while (cursor != NULL) {
             mostrarDatosEstudiante(cursor->estudiante);
+            printf("----#----#----#----#----#----#\n");
             cursor = cursor -> sgte;
         }
         printf ("  --ESTUDIANTES CARGADOS: %d--\n", le->cantEstudiantes);
@@ -159,24 +160,25 @@ void buscarEstudiantesPorRangoDeEdad(NodoEstudiante **cabeza) {
  */
 void eliminarEstudianteDeLaLista (ListaEstudiantes *le,NodoEstudiante **cabeza) {
 
-    char nombre[100];
-    int legajo;
-    int eliminado = 0;
 
-    printf("Ingrese el nombre del estudiante: ");
-    scanf("%s", nombre);
-    printf("Ingrese el numero de legajo: ");
-    scanf("%d", &legajo);
 
 
     if (le->cantEstudiantes == 0) {
         printf("[ERROR]:NO HAY NADA PARA BORRAR\n");
-    } else if (le->cantEstudiantes == 1) {
-        *cabeza = NULL;
-        le->cantEstudiantes--;
-    } else {
+    }else{
+
+        char nombre[100];
+        int legajo;
+        int eliminado = 0;
+
+        printf("Ingrese el nombre del estudiante: ");
+        scanf("%s", nombre);
+        printf("Ingrese el numero de legajo: ");
+        scanf("%d", &legajo);
+
         NodoEstudiante *aux1 = *cabeza;
         NodoEstudiante *aux2 = NULL;
+
         while (aux1 != NULL) {
             if (strcmp(aux1->estudiante.nombre, nombre) == 0 && aux1->estudiante.legajo == legajo) {
                 if (aux2 != NULL) {
